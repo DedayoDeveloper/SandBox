@@ -10,6 +10,8 @@ namespace SandBoxApp
     {
         static void Main(string[] args)
         {
+            SandBox s = new SandBox();
+            s.initializeSandBox();
         }
     }
 }
