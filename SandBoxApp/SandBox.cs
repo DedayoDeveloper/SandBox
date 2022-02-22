@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
@@ -10,13 +12,15 @@ using System.Threading.Tasks;
 using System.Runtime.Remoting;
 using System.Reflection;
 
+[assembly: System.Reflection.AssemblyKeyFile("KeyFile.snk")]
+
 namespace SandBoxApp
 {
     class SandBox : MarshalByRefObject
     {
         const string pathToUntrusted = @"..\..\..\UntrustedProject\bin\Debug";
         const string untrustedAssembly = "UntrustedProject";
-        const string untrustedClass = "SandBoxApp.UntrustedProject.Program";
+        const string untrustedClass = "UntrustedProject.Program";
         const string entryPoint = "IsFibonacci";
         private static Object[] parameters = { 45 };
 
@@ -30,6 +34,7 @@ namespace SandBoxApp
             permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
 
             StrongName fullTrustAssembly = typeof(SandBox).Assembly.Evidence.GetHostEvidence<StrongName>();
+
 
             AppDomain newDomain = AppDomain.CreateDomain("Sandbox", null, appDomain, permSet, fullTrustAssembly);
 
