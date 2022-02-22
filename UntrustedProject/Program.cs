@@ -11,8 +11,14 @@ namespace UntrustedProject
     {
         public static bool IsFibonacci(int number)
         {
-            File.ReadAllText("C:\\adir.hull.ac.uk\\home\\673950\\Desktop\\cba.txt");
+            File.ReadAllText("C:\\Temp\\file.txt");
             return false;
+        }
+        
+
+        static void Main()
+        {
+
         }
     }
 }
