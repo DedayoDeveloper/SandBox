@@ -1,7 +1,6 @@
-\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\UntrustedProject\obj\Debug\UntrustedProject.csproj.AssemblyReference.cache
-\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\UntrustedProject\obj\Debug\UntrustedProject.csproj.CoreCompileInputs.cache
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\UntrustedProject\bin\Debug\UntrustedProject.exe.config
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\UntrustedProject\bin\Debug\UntrustedProject.exe
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\UntrustedProject\bin\Debug\UntrustedProject.pdb
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\UntrustedProject\obj\Debug\UntrustedProject.csproj.CoreCompileInputs.cache
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\UntrustedProject\obj\Debug\UntrustedProject.exe
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\UntrustedProject\obj\Debug\UntrustedProject.pdb

@@ -32,6 +32,8 @@ namespace SandBoxApp
 
             PermissionSet permSet = new PermissionSet(PermissionState.None);
             permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+            permSet.AddPermission(new FileIOPermission((PermissionState)FileIOPermissionAccess.Read));
+            
 
             StrongName fullTrustAssembly = typeof(SandBox).Assembly.Evidence.GetHostEvidence<StrongName>();
 
@@ -69,7 +71,6 @@ namespace SandBoxApp
                 CodeAccessPermission.RevertAssert();
                 Console.ReadLine();
             }
-
         }
 
 

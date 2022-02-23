@@ -1,0 +1,18 @@
+* use "CSC" for windows and "CC" for Unix/MacOs command to compile a c# program file from terminal
+* To run a c# program, you only need to run the .exe executable file on your terminal
+* use "ildasm filename.exe /output=filename.il" command to produce the text version of the IL for c# compiled program
+* to compile a new IL file use the cammand "ilasm filename.il" 
+* to compile a c# program to library in c# use the command "csc filename.cs -target:library" (file would be created using .dll extention)
+* use the command "csc filename.cs /reference:filename.dll" to reference a library file when trying to compile c# program.
+
+
+
+
+
+
+
+
+
+
+
+
