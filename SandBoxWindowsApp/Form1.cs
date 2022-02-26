@@ -21,9 +21,13 @@ namespace SandBoxWindowsApp
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
-            string directoryPath = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
             String fileName = openFileDialog.FileName;
             txb_filepath.AppendText(fileName);
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
