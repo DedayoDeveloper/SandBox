@@ -31,7 +31,8 @@ namespace SandBoxWindowsApp
         {
             this.txb_filepath = new System.Windows.Forms.TextBox();
             this.btn_browse = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtbx_console = new System.Windows.Forms.RichTextBox();
+            this.btn_run = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txb_filepath
@@ -51,20 +52,32 @@ namespace SandBoxWindowsApp
             this.btn_browse.UseVisualStyleBackColor = true;
             this.btn_browse.Click += new System.EventHandler(this.btn_browse_Click);
             // 
-            // richTextBox1
+            // rtbx_console
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(29, 396);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(473, 160);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.rtbx_console.Location = new System.Drawing.Point(29, 396);
+            this.rtbx_console.Name = "rtbx_console";
+            this.rtbx_console.Size = new System.Drawing.Size(473, 160);
+            this.rtbx_console.TabIndex = 2;
+            this.rtbx_console.Text = "";
+            this.rtbx_console.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // btn_run
+            // 
+            this.btn_run.Location = new System.Drawing.Point(517, 418);
+            this.btn_run.Name = "btn_run";
+            this.btn_run.Size = new System.Drawing.Size(75, 111);
+            this.btn_run.TabIndex = 3;
+            this.btn_run.Text = "Run";
+            this.btn_run.UseVisualStyleBackColor = true;
+            this.btn_run.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 578);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.btn_run);
+            this.Controls.Add(this.rtbx_console);
             this.Controls.Add(this.txb_filepath);
             this.Controls.Add(this.btn_browse);
             this.Name = "Form1";
@@ -78,7 +91,8 @@ namespace SandBoxWindowsApp
 
         private System.Windows.Forms.TextBox txb_filepath;
         private System.Windows.Forms.Button btn_browse;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtbx_console;
+        private System.Windows.Forms.Button btn_run;
     }
 }
 
