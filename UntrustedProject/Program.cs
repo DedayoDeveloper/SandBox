@@ -19,9 +19,11 @@ namespace UntrustedProject
         }
         
 
-        static void Main()
+        public static void Main()
         {
             IsFibonacci(45);
+            Console.WriteLine("hello, thank you for using my Sand Box App");
+            Console.ReadLine();
         }
     }
 }

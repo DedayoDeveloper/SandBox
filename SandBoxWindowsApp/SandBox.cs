@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Remoting;
 using System.Reflection;
-
+[assembly: System.Reflection.AssemblyKeyFile("Key.snk")]
 namespace SandBoxWindowsApp
 {
     class SandBox : MarshalByRefObject
@@ -27,12 +27,13 @@ namespace SandBoxWindowsApp
         private static Object[] parameters = { 45 };
 
 
-        public SandBox(string filePathToUntrusted, string assembly, string assemblyClass, string point)
+        public void sandBoxVariables(string filePathToUntrusted, string assembly, string assemblyClass, string point)
         {
             this.pathToUntrusted = filePathToUntrusted;
-            untrustedAssembly = assembly;
-            untrustedClass = assemblyClass;
-            entryPoint = point;
+            this.untrustedAssembly = assembly;
+            this.untrustedClass = assemblyClass;
+            this.entryPoint = point;
+            initializeSandBox();
         }
 
        
