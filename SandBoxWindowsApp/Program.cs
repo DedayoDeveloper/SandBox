@@ -6,17 +6,35 @@ using System.Windows.Forms;
 
 namespace SandBoxWindowsApp
 {
-    static class Program
+     class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Console.WriteLine("debugging!!!");
+            if (args.Length > 0 && args[0] != string.Empty)
+            {
+                Console.WriteLine("debugging!!!");
+                //var cmdForm = new Form1();
+                //cmdForm.cmdManage(args);
+                //Environment.Exit(0);
+            }
+            else {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());
+            }
+            
         }
+
+
+
+
+
     }
 }
+
+

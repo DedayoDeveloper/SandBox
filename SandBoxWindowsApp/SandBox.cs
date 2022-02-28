@@ -65,6 +65,7 @@ namespace SandBoxWindowsApp
             newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, untrustedClass, entryPoint, parameters);
 
         }
+
         public void ExecuteUntrustedCode(string assemblyName, string typeName, string entryPoint, Object[] parameters)
         {
             //Load the MethodInfo for a method in the new Assembly. This might be a method you know, or
@@ -84,6 +85,37 @@ namespace SandBoxWindowsApp
                 CodeAccessPermission.RevertAssert();
                 Console.ReadLine();
             }
+        }
+
+
+        public void ApplicationInitialiseCmd(string txtAppPath, string txtAppParam, PermissionSet permSet)
+        {
+            string appFilePath = Path.GetDirectoryName(txtAppPath);
+            string[] appFileParam = txtAppParam.Split(' ');
+            string appAssemblyName = Path.GetFileNameWithoutExtension(txtAppPath);
+
+            // Application Domain Setup
+            AppDomainSetup adSetup = new AppDomainSetup();
+            adSetup.ApplicationBase = appFilePath;
+
+            // Strong Name using 'Sandboxer_Key.snk'
+            StrongName fullTrustAssembly = typeof(SandBox).Assembly.Evidence.GetHostEvidence<StrongName>();
+
+            // Create Application Domain with a random 'ID' value so not all sandbox domains are the same
+            Random rnd = new Random();
+            AppDomain newDomain = AppDomain.CreateDomain("Sandbox" + rnd.Next().ToString(), null, adSetup, permSet, fullTrustAssembly);
+
+            // Object handle
+            ObjectHandle handle = Activator.CreateInstanceFrom(
+                newDomain,
+                typeof(SandBox).Assembly.ManifestModule.FullyQualifiedName,
+                typeof(SandBox).FullName);
+
+            // Execute Application code
+            SandBox newDomainInstance = (SandBox)handle.Unwrap();
+            Console.WriteLine("--- {0} STARTED ---", appAssemblyName);
+            newDomain.ExecuteAssembly(txtAppPath, appFileParam);
+            Console.WriteLine("--- {0} FINISHED ---\n", appAssemblyName);
         }
     }
 }
