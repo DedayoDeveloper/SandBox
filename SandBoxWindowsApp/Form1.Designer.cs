@@ -137,6 +137,7 @@ namespace SandBoxWindowsApp
             this.checkSecurity.TabIndex = 7;
             this.checkSecurity.Text = "SECURITY-PERMISSION";
             this.checkSecurity.UseVisualStyleBackColor = false;
+            this.checkSecurity.CheckedChanged += new System.EventHandler(this.checkSecurity_CheckedChanged);
             // 
             // tbl_permissions
             // 

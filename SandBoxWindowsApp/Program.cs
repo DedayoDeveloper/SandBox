@@ -14,13 +14,12 @@ namespace SandBoxWindowsApp
         [STAThread]
         static void Main(string[] args)
         {
-            Console.WriteLine("debugging!!!");
             if (args.Length > 0 && args[0] != string.Empty)
             {
                 Console.WriteLine("debugging!!!");
-                //var cmdForm = new Form1();
-                //cmdForm.cmdManage(args);
-                //Environment.Exit(0);
+                var cmdForm = new Form1();
+                cmdForm.cmdManage(args);
+                Environment.Exit(0);
             }
             else {
                 Application.EnableVisualStyles();

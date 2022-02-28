@@ -36,9 +36,9 @@ namespace SandBoxWindowsApp
             initializeSandBox();
         }
 
-       
+      
 
-     
+
 
         public void initializeSandBox()
         {
@@ -70,7 +70,14 @@ namespace SandBoxWindowsApp
         {
             //Load the MethodInfo for a method in the new Assembly. This might be a method you know, or
             //you can use Assembly.EntryPoint to get to the main function in an executable.
-            MethodInfo target = Assembly.Load(assemblyName).GetType(typeName).GetMethod(entryPoint);
+            Assembly a = Assembly.Load(assemblyName);
+            Console.WriteLine(a);
+            Type b = Type.GetType(typeName);
+            Console.WriteLine(b);
+            MethodInfo target = b.GetMethod(entryPoint);
+            Console.WriteLine(target);
+
+
             try
             {
                 //Now invoke the method.
@@ -113,9 +120,11 @@ namespace SandBoxWindowsApp
 
             // Execute Application code
             SandBox newDomainInstance = (SandBox)handle.Unwrap();
-            Console.WriteLine("--- {0} STARTED ---", appAssemblyName);
+            Form1 form = new Form1();
+            form.writeToConsole("--- {0} STARTED ---" + appAssemblyName);     
             newDomain.ExecuteAssembly(txtAppPath, appFileParam);
-            Console.WriteLine("--- {0} FINISHED ---\n", appAssemblyName);
+            //newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, untrustedClass, entryPoint, parameters);
+            form.writeToConsole("--- {0} FINISHED ---\n" + appAssemblyName);
         }
     }
 }

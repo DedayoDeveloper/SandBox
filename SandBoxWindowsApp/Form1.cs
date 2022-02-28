@@ -27,8 +27,14 @@ namespace SandBoxWindowsApp
             InitializeComponent();
         }
 
+        public void writeToConsole(string logString)
+        {
+            // Logging to the Log Text Box
+            rtbx_console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] " + logString + "\n");
+        }
 
-         private PermissionSet pSet(string args)
+
+        private PermissionSet pSet(string args)
         {
             // Create a Permission Set -> (UN)Restricted depending on user choice
             PermissionSet permSet = checkUnrestricted.CheckState == CheckState.Checked || args.Contains("-un")
@@ -103,23 +109,23 @@ namespace SandBoxWindowsApp
         {
             if (openFileDialog == null)
             {
-                rtbx_console.AppendText("No FILE selected!.Please select file to run");
+                writeToConsole("No FILE selected!.Please select file to run");
             }
             else
             {
                 string directoryPath = System.IO.Path.GetDirectoryName(fileName);
                 String safeFileName = openFileDialog.SafeFileName;
                 string extension = System.IO.Path.GetExtension(safeFileName);
-                string result = safeFileName.Substring(0, safeFileName.Length - extension.Length);
+                //string result = safeFileName.Substring(0, safeFileName.Length - extension.Length);
                 Assembly assembly = Assembly.LoadFile(fileName);
-                String assemblyName = result;
-                string assemblyClass = null;
+                String assemblyName = assembly.FullName;
+                String assemblyClass = null;
                 Type[] t = assembly.GetTypes();
                 foreach (Type a in t)
                 {
                     if (a.GetMethod("Main") != null)
                     {
-                        assemblyClass = a.Name;
+                        assemblyClass = a.FullName;
                     }
                     else
                     {
@@ -128,7 +134,24 @@ namespace SandBoxWindowsApp
                    
                 }
                 SandBox s = new SandBox();
-                s.sandBoxVariables(directoryPath, assemblyName, assemblyClass, "Main");
+                //s.sandBoxVariables(directoryPath, assemblyName, assemblyClass, "Main");
+                try
+                {
+                    //s.sandBoxVariables(directoryPath, assemblyName, assemblyClass, "Main");
+                    s.ApplicationInitialiseCmd(fileName, assemblyName, pSet("-un"));
+                    writeToConsole("Executing Successfully");
+                }
+                catch (Exception ex)
+                {
+                    writeToConsole("ERROR : " + ex.Message);
+                    Console.WriteLine("--- {0} ERROR ---\n", Path.GetFileNameWithoutExtension(fileName));
+                    if (ex.Message.ToString() == "Demand")
+                    {
+                        int cutPoint = ex.Message.ToString().IndexOf(",");
+                        writeToConsole("DEMAND : " + ex.Message.ToString().Substring(0, cutPoint) + "'");
+                    }
+                }
+                //writeToConsole(s);
 
 
             }
@@ -210,6 +233,11 @@ namespace SandBoxWindowsApp
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkSecurity_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
