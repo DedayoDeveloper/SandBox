@@ -89,6 +89,8 @@ namespace SandBoxWindowsApp
                 //calling it with a full-trust stack.
                 new PermissionSet(PermissionState.Unrestricted).Assert();
                 Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
+                Form1 form = new Form1();
+                form.writeToConsole("SecurityException caught:\n{0}" + ex.ToString());
                 CodeAccessPermission.RevertAssert();
                 Console.ReadLine();
             }

@@ -34,6 +34,7 @@ namespace SandBoxWindowsApp
         }
 
 
+
         private PermissionSet pSet(string args)
         {
             // Create a Permission Set -> (UN)Restricted depending on user choice
@@ -125,7 +126,7 @@ namespace SandBoxWindowsApp
                 {
                     if (a.GetMethod("Main") != null)
                     {
-                        assemblyClass = a.FullName;
+                        assemblyClass = a.AssemblyQualifiedName;
                     }
                     else
                     {
@@ -137,9 +138,12 @@ namespace SandBoxWindowsApp
                 //s.sandBoxVariables(directoryPath, assemblyName, assemblyClass, "Main");
                 try
                 {
-                    //s.sandBoxVariables(directoryPath, assemblyName, assemblyClass, "Main");
-                    s.ApplicationInitialiseCmd(fileName, assemblyName, pSet("-un"));
-                    writeToConsole("Executing Successfully");
+                    
+                    writeToConsole("--- {0} STARTED ---" + " " + safeFileName);
+                    s.sandBoxVariables(directoryPath, assemblyName, assemblyClass, "Main");
+                    //s.ApplicationInitialiseCmd(fileName, assemblyName, pSet("-un"));
+                    writeToConsole("--- {0} FINISHED ---\n" + " " + safeFileName);
+                    writeToConsole("Executed Successfully");
                 }
                 catch (Exception ex)
                 {

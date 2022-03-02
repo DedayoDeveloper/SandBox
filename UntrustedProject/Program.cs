@@ -11,10 +11,12 @@ namespace UntrustedProject
     {
         public static bool IsFibonacci(int number)
         {
-        // string textFile = @ "C:\Temp\Data\Authors.txt";
+         string path ="G:\\labwork\\file.txt";
            // File.ReadAllText("G:\\labwork\\file.txt");
             Console.WriteLine("hello, thank you for using my Sand Box App");
-                   
+            FileStream fs = File.Open(path, FileMode.Open, FileAccess.Write, FileShare.None);
+
+
             return false;
         }
         
