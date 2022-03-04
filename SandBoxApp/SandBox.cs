@@ -36,7 +36,9 @@ namespace SandBoxApp
                 typeof(SandBox).FullName);
 
             SandBox instance = (SandBox)handle.Unwrap();
-            newDomain.ExecuteAssembly(filePath, appFileParam);
+                newDomain.ExecuteAssembly(filePath, appFileParam);
+          
+            
         }
     
 

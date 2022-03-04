@@ -1,0 +1,9 @@
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\bin\x64\Debug\SandBoxApp.exe.config
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\bin\x64\Debug\SandBoxApp.exe
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\bin\x64\Debug\SandBoxApp.pdb
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\x64\Debug\SandBoxApp.csproj.AssemblyReference.cache
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\x64\Debug\SandBoxApp.SandBoxForm.resources
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\x64\Debug\SandBoxApp.csproj.GenerateResource.cache
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\x64\Debug\SandBoxApp.csproj.CoreCompileInputs.cache
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\x64\Debug\SandBoxApp.exe
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\x64\Debug\SandBoxApp.pdb

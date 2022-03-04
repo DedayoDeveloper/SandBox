@@ -98,7 +98,7 @@ namespace SandBoxApp
         private void btn_browse_Click(object sender, EventArgs e)
         {
             openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Exe Files (.exe)|*.exe|All Files (*.*)|*.*";
+          //  openFileDialog.Filter = "Exe Files (.exe)|*.exe|All Files (*.*)|*.*";
             openFileDialog.ShowDialog();
             fileName = openFileDialog.FileName;
             tbx_filepath.AppendText(fileName);
@@ -119,7 +119,7 @@ namespace SandBoxApp
         {
             if (fileName == null)
             {
-                writeToConsole("No FILE selecterd! Please select file (.exe)");
+                writeToConsole("No FILE selected! Please select file (.exe)");
             }
             else
             {
@@ -128,10 +128,11 @@ namespace SandBoxApp
                 try
                 {
                     sandbox.InitializeSandBox(fileName, tbx_params.Text, pSet(string.Empty));
+                    writeToConsole("Executed Successfully!!");
                 }
                 catch (SecurityException ex)
                 {
-                    writeToConsole("SYSTEM-ERROR : " + ex.Action.ToString());
+
                     Console.WriteLine("--- {0} ERROR ---\n", Path.GetFileNameWithoutExtension(fileName));
                     if (ex.Action.ToString() == "Demand")
                     {
@@ -182,7 +183,7 @@ namespace SandBoxApp
                 }
                 catch (SecurityException ex)
                 {
-                    Console.WriteLine("ERROR : " + ex.Action.ToString());
+          
                     if (ex.Action.ToString() == "Demand")
                     {
                         int cutPoint = ex.Message.ToString().IndexOf(",");
@@ -196,6 +197,11 @@ namespace SandBoxApp
         private void tbl_permissions_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            rtbx_console.ResetText();
         }
     }
 }
