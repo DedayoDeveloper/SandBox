@@ -4,33 +4,29 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Security;
 using System.Linq;
 using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Permissions;
 using System.Net;
-using System.Runtime.Remoting;
-using System.Security.Policy;
-using System.Text.RegularExpressions;
 
-namespace SandBoxWindowsApp
+namespace SandBoxApp
 {
-    public partial class Form1 : Form
+    public partial class SandBoxForm : Form
     {
+        OpenFileDialog openFileDialog;
         string fileName;
-        OpenFileDialog openFileDialog = null;
-        public Form1()
+        public SandBoxForm()
         {
             InitializeComponent();
         }
 
-        public void writeToConsole(string logString)
+        private void SandBoxForm_Load(object sender, EventArgs e)
         {
-            // Logging to the Log Text Box
-            rtbx_console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] " + logString + "\n");
+
         }
 
 
@@ -80,8 +76,9 @@ namespace SandBoxWindowsApp
             permSet.AddPermission(checkStore.CheckState == CheckState.Checked || args.Contains("-st")
                 ? new StorePermission(PermissionState.Unrestricted) : new StorePermission(PermissionState.None));
 
-            //permSet.AddPermission(checkTypeDescriptor.CheckState == CheckState.Checked || args.Contains("-ctd")
-            //    ? new TypeDescriptorPermission(PermissionState.Unrestricted) : new TypeDescriptorPermission(PermissionState.None));
+            permSet.AddPermission(checkTypeDescriptor.CheckState == CheckState.Checked || args.Contains("-ctd")
+            ? new TypeDescriptorPermission(PermissionState.Unrestricted) : new TypeDescriptorPermission(PermissionState.None));
+
 
             permSet.AddPermission(checkWeb.CheckState == CheckState.Checked || args.Contains("-web")
                 ? new WebPermission(PermissionState.Unrestricted) : new WebPermission(PermissionState.None));
@@ -90,94 +87,70 @@ namespace SandBoxWindowsApp
         }
 
 
+
+
+
+        private void checkReflection_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void btn_browse_Click(object sender, EventArgs e)
         {
             openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Exe Files (.exe)|*.exe|All Files (*.*)|*.*";
             openFileDialog.ShowDialog();
             fileName = openFileDialog.FileName;
-            txb_filepath.AppendText(fileName);       
+            tbx_filepath.AppendText(fileName);
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void tbx_filepath_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-
-
-        private void button1_Click(object sender, EventArgs e)
+        public void writeToConsole(string val)
         {
-            if (openFileDialog == null)
+            rtbx_console.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] " + val + "\n");
+        }
+
+
+        private void btn_run_Click(object sender, EventArgs e)
+        {
+            if (fileName == null)
             {
-                writeToConsole("No FILE selected!.Please select file to run");
+                writeToConsole("No FILE selecterd! Please select file (.exe)");
             }
             else
             {
-                string directoryPath = System.IO.Path.GetDirectoryName(fileName);
-                String safeFileName = openFileDialog.SafeFileName;
-                string extension = System.IO.Path.GetExtension(safeFileName);
-                //string result = safeFileName.Substring(0, safeFileName.Length - extension.Length);
-                Assembly assembly = Assembly.LoadFile(fileName);
-                String assemblyName = assembly.FullName;
-                String assemblyClass = null;
-                Type[] t = assembly.GetTypes();
-                foreach (Type a in t)
-                {
-                    if (a.GetMethod("Main") != null)
-                    {
-                        assemblyClass = a.AssemblyQualifiedName;
-                    }
-                    else
-                    {
-                        
-                    }
-                   
-                }
-                SandBox s = new SandBox();
-                //s.sandBoxVariables(directoryPath, assemblyName, assemblyClass, "Main");
+                SandBox sandbox = new SandBox();
+                writeToConsole("Executing " + Path.GetFileName(fileName));
                 try
                 {
-                    
-                    writeToConsole("--- {0} STARTED ---" + " " + safeFileName);
-                    s.sandBoxVariables(directoryPath, assemblyName, assemblyClass, "Main");
-                    //s.ApplicationInitialiseCmd(fileName, assemblyName, pSet("-un"));
-                    writeToConsole("--- {0} FINISHED ---\n" + " " + safeFileName);
-                    writeToConsole("Executed Successfully");
+                    sandbox.InitializeSandBox(fileName, tbx_params.Text, pSet(string.Empty));
                 }
-                catch (Exception ex)
+                catch (SecurityException ex)
                 {
-                    writeToConsole("ERROR : " + ex.Message);
+                    writeToConsole("SYSTEM-ERROR : " + ex.Action.ToString());
                     Console.WriteLine("--- {0} ERROR ---\n", Path.GetFileNameWithoutExtension(fileName));
-                    if (ex.Message.ToString() == "Demand")
+                    if (ex.Action.ToString() == "Demand")
                     {
                         int cutPoint = ex.Message.ToString().IndexOf(",");
-                        writeToConsole("DEMAND : " + ex.Message.ToString().Substring(0, cutPoint) + "'");
+                        writeToConsole("--- ERROR --- : " + ex.Message.ToString().Substring(0, cutPoint) + "'");
                     }
                 }
-                //writeToConsole(s);
-
+                writeToConsole("Terminated " + Path.GetFileName(fileName));
 
             }
-            
-        }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
-
-
-
-        public void cmdManage(string[] args)
+        public void startSandBoxFromTerminal(string[] args)
         {
-            Console.WriteLine(args);
-            // Help/Permissions list display after the appripriate -h argument entered
+     
             if (args.Contains("-h") || args.Contains("-H"))
             {
-
-                
                 Console.WriteLine(@"Parameters: ""<application path>"" ""<application parameters>"" ""<permissions>""");
                 Console.WriteLine("-un = Unrestricted permissions");
                 Console.WriteLine("-io = IO permissions");
@@ -191,6 +164,7 @@ namespace SandBoxWindowsApp
                 Console.WriteLine("-ref = Reflection permissions");
                 Console.WriteLine("-reg = Registry permissions");
                 Console.WriteLine("-st = Store permissions");
+                Console.WriteLine("-ctd = Check Type Descriptor permissions");
                 Console.WriteLine("-web = Web permissions");
             }
             else
@@ -201,10 +175,10 @@ namespace SandBoxWindowsApp
             // Execute Sandboxer functionality through command line when appropriate amount of arguments given
             if (args.Count() == 3)
             {
-                SandBox appSandbox = new SandBox();
+                SandBox sandBox = new SandBox();
                 try
                 {
-                    appSandbox.ApplicationInitialiseCmd(args[0].ToString(), args[1].ToString(), pSet(args[2].ToString()));
+                    sandBox.InitializeSandBox(args[0].ToString(), args[1].ToString(), pSet(args[2].ToString()));
                 }
                 catch (SecurityException ex)
                 {
@@ -212,36 +186,16 @@ namespace SandBoxWindowsApp
                     if (ex.Action.ToString() == "Demand")
                     {
                         int cutPoint = ex.Message.ToString().IndexOf(",");
-                        Console.WriteLine("DEMAND : " + ex.Message.ToString().Substring(0, cutPoint) + "'");
+                        Console.WriteLine("--- ERROR --- : " + ex.Message.ToString().Substring(0, cutPoint) + "'");
                     }
                 }
             }
 
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void tbl_permissions_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox11_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkSecurity_CheckedChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }

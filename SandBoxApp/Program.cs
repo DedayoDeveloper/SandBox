@@ -1,17 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SandBoxApp
 {
     class Program
     {
+
+        [STAThread]
         static void Main(string[] args)
         {
-            SandBox s = new SandBox();
-            s.initializeSandBox();
+            
+            if (args.Length > 0 && args[0] != string.Empty)
+            {
+                var cmdStartSandBox = new SandBoxForm();
+                 cmdStartSandBox.startSandBoxFromTerminal(args);
+                Environment.Exit(0);
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new SandBoxForm());
+            }
         }
     }
 }

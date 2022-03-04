@@ -1,6 +1,9 @@
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\bin\Debug\SandBoxApp.exe.config
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\bin\Debug\SandBoxApp.exe
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\bin\Debug\SandBoxApp.pdb
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\Debug\SandBoxApp.SandBoxForm.resources
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\Debug\SandBoxApp.csproj.GenerateResource.cache
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\Debug\SandBoxApp.csproj.CoreCompileInputs.cache
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\Debug\SandBoxApp.exe
 \\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\Debug\SandBoxApp.pdb
+\\adir.hull.ac.uk\home\673\673950\Desktop\dev-project course\SandBoxApp\SandBoxApp\obj\Debug\SandBoxApp.csproj.AssemblyReference.cache
